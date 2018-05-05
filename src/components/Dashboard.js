@@ -1,30 +1,31 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Question from './Question'
+import {handleSubmitQuestionAnswer} from '../actions/questions'
 
 class Dashboard extends Component{
   render(){
     const{ currentUser, answered, unanswered} = this.props
-    console.log("Dashboard rendering: ", this.props)
+    // console.log("Dashboard rendering: ", JSON.stringify(unanswered))
     return(
       <div>
         <h3 className='center'>Unanswered</h3>
         <ul>
         {
-          unanswered.map((question)=>(
-            <li key={question.id}>
-              <Question id={question.id} />
-            </li>
-          ))
+          unanswered.map((question)=>{
+            return(<li key={question.id}>
+              <Question authedUserId={currentUser.id} question={question}/>
+            </li>)
+          })
         }
         </ul>
         <h3 className='center'>Answered</h3>
         <ul>
         {
           answered.map((question)=>{
-            <li key={question.id}>
-              <Question id={question.id} />
-            </li>
+            return(<li key={question.id}>
+              <Question authedUserId={currentUser.id} question={question} />
+            </li>)
           })
         }
         </ul>
@@ -33,7 +34,9 @@ class Dashboard extends Component{
   }
 }
 
-function mapStateToProps({users, questions, authedUser}){
+function mapStateToProps(props){
+  // console.log("Dashboard mapStateToProps called" + JSON.stringify(props))
+  const {users, questions, authedUser} = props
   let currentUser = null
   const answered =[]
   const unanswered = []
@@ -50,8 +53,6 @@ function mapStateToProps({users, questions, authedUser}){
       }
     })
   }
-
-  console.log("After mapStateToProps: " + answered)
   return { currentUser: currentUser, answered: answered, unanswered: unanswered }
 }
 
