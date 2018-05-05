@@ -37,11 +37,11 @@ class Question extends Component{
 }
 
 function mapStateToProps({questions, authedUser}, {id}){
-  console.log("Question mapStateToProps called")
+  console.log(`Question mapStateToProps called. ${authedUser}, ${id}`)
     return{
-      qt: questions[id],
+      question: questions[id],
       authedUserId: authedUser
     }
 }
 
-export default connect()(Question)
+export default connect(mapStateToProps)(Question)

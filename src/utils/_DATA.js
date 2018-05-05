@@ -132,7 +132,8 @@ export function _getQuestions () {
 }
 
 function formatQuestion ({ optionOneText, optionTwoText, author }) {
-  return {
+
+  const question= {
     id: generateUID(),
     timestamp: Date.now(),
     author,
@@ -145,18 +146,25 @@ function formatQuestion ({ optionOneText, optionTwoText, author }) {
       text: optionTwoText,
     }
   }
+  return question
 }
 
 export function _saveQuestion (question) {
   return new Promise((res, rej) => {
     const formattedQuestion = formatQuestion(question)
-
     setTimeout(() => {
       questions = {
         ...questions,
         [formattedQuestion.id]: formattedQuestion
       }
 
+      users = {
+        ...users,
+        [formattedQuestion.author]: {
+          ...users[formattedQuestion.author],
+          questions: [...users[formattedQuestion.author]['questions'].concat([formattedQuestion.id])]
+        }
+      }
       res(formattedQuestion)
     }, 1000)
   })

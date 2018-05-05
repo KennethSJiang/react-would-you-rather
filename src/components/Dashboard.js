@@ -14,7 +14,7 @@ class Dashboard extends Component{
         {
           unanswered.map((question)=>{
             return(<li key={question.id}>
-              <Question authedUserId={currentUser.id} question={question}/>
+              <Question id={question.id}/>
             </li>)
           })
         }
@@ -24,7 +24,7 @@ class Dashboard extends Component{
         {
           answered.map((question)=>{
             return(<li key={question.id}>
-              <Question authedUserId={currentUser.id} question={question} />
+              <Question id={question.id} />
             </li>)
           })
         }
@@ -35,7 +35,7 @@ class Dashboard extends Component{
 }
 
 function mapStateToProps(props){
-  // console.log("Dashboard mapStateToProps called" + JSON.stringify(props))
+  // console.log("Dashboard mapStateToProps called updated questions are " + JSON.stringify(props.questions))
   const {users, questions, authedUser} = props
   let currentUser = null
   const answered =[]
