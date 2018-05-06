@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import { handleInitialData } from '../actions/shared'
 import Dashboard from './Dashboard'
 import NewQuestion from './NewQuestion'
+import Leaderboard from './Leaderboard'
 import LoadingBar from 'react-redux-loading'
 import Nav from './Nav'
 import { BrowserRouter as Router, Route} from 'react-router-dom'
@@ -25,6 +26,7 @@ class App extends Component {
               <div>
                 <Route path='/' exact component={Dashboard}/>
                 <Route path='/new' component={NewQuestion}/>
+                <Route path='/leaderboard' component={Leaderboard}/>
               </div>
             }
           </div>

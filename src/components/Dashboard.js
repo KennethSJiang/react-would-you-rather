@@ -19,6 +19,7 @@ class Dashboard extends Component{
           })
         }
         </ul>
+        <hr/>
         <h3 className='center'>Answered</h3>
         <ul>
         {
