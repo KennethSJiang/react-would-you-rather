@@ -24,7 +24,6 @@ class Leaderboard extends Component{
 }
 
 function mapStateToProps({users}){
-  console.log(`Leaderboard user object: ${JSON.stringify(users)}`)
   const sortedUsers = Object.keys(users).map((userId) =>{
     return {id: userId, name: users[userId].name, avatar: users[userId].avatarURL, questions: users[userId].questions.length, answered: Object.keys(users[userId].answers).length}
   }).sort((userA, userB) => {

@@ -3,7 +3,6 @@ import { RECEIVE_QUESTIONS, CREATE_NEW_QUESTION, SUBMIT_QUESTION_ANSWER } from '
 export default function questions(state={}, action){
   switch(action.type){
     case RECEIVE_QUESTIONS:
-      // console.log("Questions Reducer received RECEIVE_QUESTIONS: " + JSON.stringify(action))
       return {
         ...state,
         ...action.questions

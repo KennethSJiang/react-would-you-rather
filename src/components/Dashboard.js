@@ -31,7 +31,7 @@ class Dashboard extends Component{
           (this.state.showUnanswered ? unanswered : answered).map((question)=>{
             return(
               <li key={question.id} className='question'>
-                <Link to={`/question/${question.id}`}>
+                <Link to={`/questions/${question.id}`}>
                 Would you rather <u>{question.optionOne.text}</u> or <u>{question.optionTwo.text}</u>?
                 </Link>
                 {!this.state.showUnanswered &&
@@ -49,7 +49,6 @@ class Dashboard extends Component{
 }
 
 function mapStateToProps(props){
-  // console.log("Dashboard mapStateToProps called updated questions are " + JSON.stringify(props.questions))
   const {users, questions, authedUser} = props
   let currentUser = null
   const answered =[]

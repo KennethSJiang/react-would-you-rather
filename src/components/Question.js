@@ -64,7 +64,6 @@ class Question extends Component{
 }
 
 function mapStateToProps({questions, users, authedUser}, props){
-  // console.log(`Question mapStateToProps called. ${users[questions[id]]}, ${id}`)
     const {id} = props.match.params
     return{
       question: questions[id],

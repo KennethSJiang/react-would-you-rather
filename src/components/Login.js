@@ -40,7 +40,6 @@ class Login extends Component {
 
 
 function mapStateToProps({users}){
-  console.log(`Leaderboard user object: ${JSON.stringify(users)}`)
   return {
     users: users
   }

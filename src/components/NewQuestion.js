@@ -13,7 +13,6 @@ class NewQuestion extends Component{
   handleSubmit = (e) =>{
     e.preventDefault()
     const {dispatch, author} = this.props
-    console.log(`I'm in NEW QUETION: PROPS is ${JSON.stringify(this.props)}`)
     const {optionOne, optionTwo} = this.state
     dispatch(handleNewQuestion({optionOneText: optionOne, optionTwoText: optionTwo, author: author}))
     this.setState(()=>({
@@ -29,7 +28,6 @@ class NewQuestion extends Component{
       [option]: text,
       toHome: false
     }))
-    // console.log('After handleChange, ' + JSON.stringify(this.state))
   }
 
   render(){

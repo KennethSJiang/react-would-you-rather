@@ -38,8 +38,8 @@ class App extends Component {
                 <hr/>
                 <div>
                   <Route path='/' exact component={Dashboard}/>
-                  <Route path='/new' component={NewQuestion}/>
-                  <Route path='/question/:id' component={Question}/>
+                  <Route path='/add' component={NewQuestion}/>
+                  <Route path='/questions/:id' component={Question}/>
                   <Route path='/404' component={ErrorPage}/>
                   <Route path='/leaderboard' component={Leaderboard}/>
                 </div>
