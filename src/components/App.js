@@ -5,6 +5,7 @@ import { setAuthedUser } from '../actions/authedUser'
 import Dashboard from './Dashboard'
 import NewQuestion from './NewQuestion'
 import Leaderboard from './Leaderboard'
+import ErrorPage from './ErrorPage'
 import Question from './Question'
 import Login from './Login'
 import LoadingBar from 'react-redux-loading'
@@ -39,6 +40,7 @@ class App extends Component {
                   <Route path='/' exact component={Dashboard}/>
                   <Route path='/new' component={NewQuestion}/>
                   <Route path='/question/:id' component={Question}/>
+                  <Route path='/404' component={ErrorPage}/>
                   <Route path='/leaderboard' component={Leaderboard}/>
                 </div>
               </Fragment>

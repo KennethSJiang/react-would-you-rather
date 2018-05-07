@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {Redirect} from 'react-router-dom'
 import {handleSubmitQuestionAnswer} from '../actions/questions'
 
 class Question extends Component{
@@ -15,6 +16,11 @@ class Question extends Component{
 
   render(){
     const {question, currentUser, questionAuthor, totalUsers} = this.props
+
+    if(!question){
+      return <Redirect to='/404' />
+    }
+
     let optionOneColor = question.optionOne.votes.includes(currentUser.id) ? '#808080' : '#ffffff'
     let optionTwoColor = question.optionTwo.votes.includes(currentUser.id) ? '#808080' : '#ffffff'
 
@@ -64,7 +70,7 @@ function mapStateToProps({questions, users, authedUser}, props){
       question: questions[id],
       totalUsers: Object.keys(users).length,
       currentUser: users[authedUser],
-      questionAuthor: users[questions[id].author]
+      questionAuthor: questions[id] ? users[questions[id].author] : null
     }
 }
 

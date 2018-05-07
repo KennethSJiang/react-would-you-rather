@@ -224,3 +224,24 @@ input:checked + .slider:before {
   -ms-transform: translateX(26px);
   transform: translateX(26px);
 }
+
+.error-container {
+  background-color: #2D72D9;
+  color: #fff;
+  font-family: "Whitney SSm A", "Whitney SSm B", "Helvetica Neue", Helvetica, Arial, Sans-Serif;
+  position: relative;
+  -moz-font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
+  top: 50%;
+  text-align: center;
+  height: initial;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.error-container h1 {
+  margin: 0;
+  font-size: 130px;
+  font-weight: 300;
+}
