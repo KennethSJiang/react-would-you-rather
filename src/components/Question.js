@@ -5,14 +5,18 @@ import {handleSubmitQuestionAnswer} from '../actions/questions'
 class Question extends Component{
   handleQuestionAnswer = (event, answer) => {
     event.preventDefault()
-    const {dispatch, question, authedUserId} = this.props
-    dispatch(handleSubmitQuestionAnswer({ authedUser: authedUserId, qid: question.id, answer: answer }))
+    const {dispatch, question, currentUser} = this.props
+    if(Object.keys(currentUser.answers).includes(question.id)){
+      alert("You cannot change your poll!")
+    } else {
+      dispatch(handleSubmitQuestionAnswer({ authedUser: currentUser.id, qid: question.id, answer: answer }))
+    }
   }
 
   render(){
-    const {question, authedUserId, questionAuthor } = this.props
-    let optionOneColor = question.optionOne.votes.includes(authedUserId) ? '#808080' : '#ffffff'
-    let optionTwoColor = question.optionTwo.votes.includes(authedUserId) ? '#808080' : '#ffffff'
+    const {question, currentUser, questionAuthor } = this.props
+    let optionOneColor = question.optionOne.votes.includes(currentUser.id) ? '#808080' : '#ffffff'
+    let optionTwoColor = question.optionTwo.votes.includes(currentUser.id) ? '#808080' : '#ffffff'
 
     return(
       <div className='question'>
@@ -41,7 +45,7 @@ function mapStateToProps({questions, users, authedUser}, {id}){
   // console.log(`Question mapStateToProps called. ${users[questions[id]]}, ${id}`)
     return{
       question: questions[id],
-      authedUserId: authedUser,
+      currentUser: users[authedUser],
       questionAuthor: users[questions[id].author]
     }
 }
