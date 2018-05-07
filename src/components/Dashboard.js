@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Question from './Question'
 import {handleSubmitQuestionAnswer} from '../actions/questions'
+import {Link, withRouter} from 'react-router-dom'
 
 class Dashboard extends Component{
   state ={
@@ -28,9 +29,17 @@ class Dashboard extends Component{
         <ul>
         {
           (this.state.showUnanswered ? unanswered : answered).map((question)=>{
-            return(<li key={question.id}>
-              <Question id={question.id}/>
-            </li>)
+            return(
+              <li key={question.id} className='question'>
+                <Link to={`/question/${question.id}`}>
+                Would you rather <u>{question.optionOne.text}</u> or <u>{question.optionTwo.text}</u>?
+                </Link>
+                {!this.state.showUnanswered &&
+                  (<p className='replying-to'> You answered {
+                    question.optionOne.votes.includes(currentUser.id) ?
+                      question.optionOne.text : question.optionTwo.text}</p>)}
+              </li>
+            )
           })
         }
         </ul>
@@ -61,4 +70,4 @@ function mapStateToProps(props){
   return { currentUser: currentUser, answered: answered, unanswered: unanswered }
 }
 
-export default connect(mapStateToProps)(Dashboard)
+export default withRouter(connect(mapStateToProps)(Dashboard))
