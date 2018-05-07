@@ -34,7 +34,7 @@ class App extends Component {
             {hasLoggedIn ?
               <Login /> :
               <Fragment>
-                <p>Youre login as <b>{currentUser.name}</b><button className='btn-mini' onClick={this.handleLogoutClick}>Logout</button></p>
+                <p>Welcome <b>{currentUser.name}</b>!<button className='btn-mini' onClick={this.handleLogoutClick}>Logout</button></p>
                 <hr/>
                 <div>
                   <Route path='/' exact component={Dashboard}/>

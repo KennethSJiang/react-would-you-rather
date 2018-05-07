@@ -17,15 +17,15 @@ class Dashboard extends Component{
 
   render(){
     const{ currentUser, answered, unanswered} = this.props
-    console.log("Dashboard rendering SHOW: ", JSON.stringify(this.state.showUnanswered))
+
     return(
       <div className='center'>
-        <span className='center'>UNANSWERED - </span>
+        <span className='center'>UNANSWERED </span>
         <label className="switch">
           <input type="checkbox" value={this.state.showUnanswered} onChange={this.handleViewToggle} />
           <div className="slider"></div>
         </label>
-        <span className='center'> - ANSWERED</span>
+        <span className='center'> ANSWERED</span>
         <ul>
         {
           (this.state.showUnanswered ? unanswered : answered).map((question)=>{
