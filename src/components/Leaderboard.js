@@ -11,7 +11,8 @@ class Leaderboard extends Component{
           users.map((user) => (
             <li key={user.id} className='question'>
               <div className='question-info'>
-                <span>{ranking++}. {user.id}</span>
+                <img src={user.avatar} alt={`Avatar of ${user.id}`} className='avatar'/>
+                <span>{ranking++}. {user.name}</span>
                 <div className='replying-to'>answered {user.answered} questions / submitted {user.questions} questions</div>
               </div>
             </li>
@@ -25,10 +26,11 @@ class Leaderboard extends Component{
 function mapStateToProps({users}){
   console.log(`Leaderboard user object: ${JSON.stringify(users)}`)
   const sortedUsers = Object.keys(users).map((userId) =>{
-    return {id: userId, questions: users[userId].questions.length, answered: Object.keys(users[userId].answers).length}
+    return {id: userId, name: users[userId].name, avatar: users[userId].avatarURL, questions: users[userId].questions.length, answered: Object.keys(users[userId].answers).length}
   }).sort((userA, userB) => {
     return userB.questions + userB.answered - userA.questions - userA.answered
   })
+
   return{
     users: sortedUsers
   }

@@ -32,7 +32,7 @@ class App extends Component {
             {hasLoggedIn ?
               <Login /> :
               <Fragment>
-                <p>Youre login as <b>{currentUser}</b><button className='btn-mini' onClick={this.handleLogoutClick}>Logout</button></p>
+                <p>Youre login as <b>{currentUser.name}</b><button className='btn-mini' onClick={this.handleLogoutClick}>Logout</button></p>
                 <div>
                   <Route path='/' exact component={Dashboard}/>
                   <Route path='/new' component={NewQuestion}/>
@@ -47,10 +47,10 @@ class App extends Component {
   }
 }
 
-function mapStateToProps({authedUser}){
+function mapStateToProps({users, authedUser}){
   return{
     hasLoggedIn: authedUser === null,
-    currentUser: authedUser
+    currentUser: users[authedUser]
   }
 }
 

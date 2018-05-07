@@ -10,7 +10,7 @@ class Question extends Component{
   }
 
   render(){
-    const {question, authedUserId } = this.props
+    const {question, authedUserId, questionAuthor } = this.props
     let optionOneColor = question.optionOne.votes.includes(authedUserId) ? '#808080' : '#ffffff'
     let optionTwoColor = question.optionTwo.votes.includes(authedUserId) ? '#808080' : '#ffffff'
 
@@ -29,18 +29,20 @@ class Question extends Component{
             className='question'
             style={{backgroundColor:`${optionTwoColor}`}}>{question.optionTwo.text}/{question.id}</span>
         </div>
-        <div className='replying-to'>submitted by: {question.author}</div>
+        <div className='replying-to'>submitted by: {questionAuthor.id}</div>
+        <img src={questionAuthor.avatarURL} alt={`Avatar of ${questionAuthor.id}`} className='avatar'/>
         </div>
       </div>
     )
   }
 }
 
-function mapStateToProps({questions, authedUser}, {id}){
-  console.log(`Question mapStateToProps called. ${authedUser}, ${id}`)
+function mapStateToProps({questions, users, authedUser}, {id}){
+  // console.log(`Question mapStateToProps called. ${users[questions[id]]}, ${id}`)
     return{
       question: questions[id],
-      authedUserId: authedUser
+      authedUserId: authedUser,
+      questionAuthor: users[questions[id].author]
     }
 }
 
