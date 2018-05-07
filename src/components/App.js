@@ -33,6 +33,7 @@ class App extends Component {
               <Login /> :
               <Fragment>
                 <p>Youre login as <b>{currentUser.name}</b><button className='btn-mini' onClick={this.handleLogoutClick}>Logout</button></p>
+                <hr/>
                 <div>
                   <Route path='/' exact component={Dashboard}/>
                   <Route path='/new' component={NewQuestion}/>

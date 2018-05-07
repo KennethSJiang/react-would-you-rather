@@ -4,28 +4,32 @@ import Question from './Question'
 import {handleSubmitQuestionAnswer} from '../actions/questions'
 
 class Dashboard extends Component{
+  state ={
+    showUnanswered: true
+  }
+
+  handleViewToggle = (e) =>{
+    this.setState(() => ({
+      showUnanswered: !this.state.showUnanswered
+    }))
+  }
+
   render(){
     const{ currentUser, answered, unanswered} = this.props
-    console.log("Dashboard rendering: ", JSON.stringify(currentUser))
+    console.log("Dashboard rendering SHOW: ", JSON.stringify(this.state.showUnanswered))
     return(
-      <div>
-        <h3 className='center'>Unanswered</h3>
+      <div className='center'>
+        <span className='center'>UNANSWERED - </span>
+        <label className="switch">
+          <input type="checkbox" value={this.state.showUnanswered} onChange={this.handleViewToggle} />
+          <div className="slider"></div>
+        </label>
+        <span className='center'> - ANSWERED</span>
         <ul>
         {
-          unanswered.map((question)=>{
+          (this.state.showUnanswered ? unanswered : answered).map((question)=>{
             return(<li key={question.id}>
               <Question id={question.id}/>
-            </li>)
-          })
-        }
-        </ul>
-        <hr/>
-        <h3 className='center'>Answered</h3>
-        <ul>
-        {
-          answered.map((question)=>{
-            return(<li key={question.id}>
-              <Question id={question.id} />
             </li>)
           })
         }
