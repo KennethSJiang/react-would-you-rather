@@ -1,9 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import {connect} from 'react-redux'
 import { handleInitialData } from '../actions/shared'
+import { setAuthedUser } from '../actions/authedUser'
 import Dashboard from './Dashboard'
 import NewQuestion from './NewQuestion'
 import Leaderboard from './Leaderboard'
+import Login from './Login'
 import LoadingBar from 'react-redux-loading'
 import Nav from './Nav'
 import { BrowserRouter as Router, Route} from 'react-router-dom'
@@ -14,20 +16,29 @@ class App extends Component {
     this.props.dispatch(handleInitialData())
   }
 
+  handleLogoutClick = (e) =>{
+    e.preventDefault()
+    this.props.dispatch(setAuthedUser(null))
+  }
+
   render() {
+    const { hasLoggedIn, currentUser } = this.props
     return (
       <Router>
         <Fragment>
           <LoadingBar />
           <div className='container'>
             <Nav />
-            {this.props.loading ?
-              null :
-              <div>
-                <Route path='/' exact component={Dashboard}/>
-                <Route path='/new' component={NewQuestion}/>
-                <Route path='/leaderboard' component={Leaderboard}/>
-              </div>
+            {hasLoggedIn ?
+              <Login /> :
+              <Fragment>
+                <p>Youre login as <b>{currentUser}</b><button className='btn-mini' onClick={this.handleLogoutClick}>Logout</button></p>
+                <div>
+                  <Route path='/' exact component={Dashboard}/>
+                  <Route path='/new' component={NewQuestion}/>
+                  <Route path='/leaderboard' component={Leaderboard}/>
+                </div>
+              </Fragment>
             }
           </div>
         </Fragment>
@@ -38,7 +49,8 @@ class App extends Component {
 
 function mapStateToProps({authedUser}){
   return{
-    loading: authedUser === null
+    hasLoggedIn: authedUser === null,
+    currentUser: authedUser
   }
 }
 

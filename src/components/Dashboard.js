@@ -6,7 +6,7 @@ import {handleSubmitQuestionAnswer} from '../actions/questions'
 class Dashboard extends Component{
   render(){
     const{ currentUser, answered, unanswered} = this.props
-    // console.log("Dashboard rendering: ", JSON.stringify(unanswered))
+    console.log("Dashboard rendering: ", JSON.stringify(currentUser))
     return(
       <div>
         <h3 className='center'>Unanswered</h3>
