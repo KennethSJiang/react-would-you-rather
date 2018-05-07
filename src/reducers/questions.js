@@ -13,7 +13,6 @@ export default function questions(state={}, action){
         [action.formattedQuestion.id]: action.formattedQuestion
       }
     case SUBMIT_QUESTION_ANSWER:
-      // console.log("Questions Reducer received SUBMIT_QUESTION_ANSWER: " + JSON.stringify(action))
       const {authedUser, qid, answer} = action.questionAnswer
       let optionOne = state[qid].optionOne
       let optionTwo = state[qid].optionTwo
