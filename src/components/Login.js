@@ -1,48 +1,46 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { setAuthedUser } from '../actions/authedUser'
 
-class Login extends Component {
-  handleUserLogin = (e, userId) =>{
-    const { dispatch } = this.props
-    e.preventDefault()
-    dispatch(setAuthedUser(userId))
+const Login = ({onLogin, users, authedUser}) => {
+  if(authedUser){
+    return <Redirect to='/' />
+  }else{
+    return(
+      <div className='center'>
+      <h3>Login as one of users below</h3>
+      <ul>
+        {
+          Object.keys(users).map((userId) => (
+            <li key={userId} className='question'>
+              <div
+                className='question-info'
+                onClick={()=> onLogin(userId)}
+              >
+                <span>{userId}</span>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+      </div>
+    )
   }
+}
 
-  render(){
-    const { users, authedUser } = this.props
-    if(authedUser){
-      return <Redirect to='/' />
-    }else{
-      return(
-        <div className='center'>
-        <h3>Login as one of users below</h3>
-        <ul>
-          {
-            Object.keys(users).map((userId) => (
-              <li key={userId} className='question'>
-                <div
-                  className='question-info'
-                  onClick={(e)=> this.handleUserLogin(e, userId)}
-                >
-                  <span>{userId}</span>
-                </div>
-              </li>
-            ))
-          }
-        </ul>
-        </div>
-      )
+function mapDispatchToProps(dispatch){
+  return{
+    onLogin: (userId) => {
+      dispatch(setAuthedUser(userId))
     }
   }
 }
 
-
 function mapStateToProps({users}){
   return {
-    users: users
+    users
   }
 }
 
-export default connect(mapStateToProps)(Login)
+export default connect(mapStateToProps, mapDispatchToProps)(Login)
