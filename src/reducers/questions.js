@@ -14,8 +14,8 @@ export default function questions(state={}, action){
       }
     case SUBMIT_QUESTION_ANSWER:
       const {authedUser, qid, answer} = action.questionAnswer
-      const optionOne = state[qid].optionOne
-      const optionTwo = state[qid].optionTwo
+      let optionOne = state[qid].optionOne
+      let optionTwo = state[qid].optionTwo
       if(answer === 'optionOne'){
         optionOne = {
           ...optionOne,
