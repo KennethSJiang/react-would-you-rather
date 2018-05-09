@@ -1,27 +1,28 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
-class Leaderboard extends Component{
-  render(){
-    const {users} = this.props
-    let ranking = 1
-    return(
-      <ul>
-        {
-          users.map((user) => (
-            <li key={user.id} className='question'>
-              <div className='question-info'>
-                <img src={user.avatar} alt={`Avatar of ${user.id}`} className='avatar'/>
-                <span>{ranking++}. {user.name}</span>
-                <div className='replying-to'>answered {user.answered} questions / submitted {user.questions} questions</div>
-              </div>
+const Leaderboard = ({users}) => {
+  let ranking = 1
+  return(
+    <ul>
+      {
+        users.map((user) => {
+          const {userId, avatar, answered, name, questions} = user
+          return(
+            <li key={userId} className='question'>
+            <div className='question-info'>
+              <img src={avatar} alt={`Avatar of ${userId}`} className='avatar'/>
+              <span>{ranking++}. {name}</span>
+              <div className='replying-to'>answered {answered} questions / submitted {questions} questions</div>
+            </div>
             </li>
-          ))
-        }
-      </ul>
-    )
-  }
+          )
+        })
+      }
+    </ul>
+  )
 }
+
 
 function mapStateToProps({users}){
   const sortedUsers = Object.keys(users).map((userId) =>{
