@@ -21,9 +21,8 @@ class Question extends Component{
       return <Redirect to='/404' />
     }
 
-    let optionOneColor = question.optionOne.votes.includes(currentUser.id) ? '#808080' : '#ffffff'
-    let optionTwoColor = question.optionTwo.votes.includes(currentUser.id) ? '#808080' : '#ffffff'
-
+    const optionOneColor = question.optionOne.votes.includes(currentUser.id) ? '#808080' : '#ffffff'
+    const optionTwoColor = question.optionTwo.votes.includes(currentUser.id) ? '#808080' : '#ffffff'
     return(
       <div className='question'>
         <div className='center'>
